@@ -14,7 +14,7 @@ public class Neighbor implements Parcelable {
 	
 
 	private String name;	// human readable name
-	private String id; 	// unique id
+	private String id; 		// unique id
 	private Availability availability;
 	// TODO discovery time
 	// TODO proximity
@@ -26,8 +26,7 @@ public class Neighbor implements Parcelable {
 		setAvailability(avail);
 	}
 	
-	
-	
+	// parcelling logic
 	@Override
 	public int describeContents() {
 		return 0;
@@ -38,18 +37,17 @@ public class Neighbor implements Parcelable {
 		dest.writeString(getId());
 		dest.writeString(availability.name());
 	}
-	
 	public Neighbor( Parcel in ) {
 		setName(in.readString());
 		setId(in.readString());
 		setAvailability(Availability.valueOf(in.readString()));
 	}
 	
+	// all will have unique id.
 	@Override
 	public int hashCode() {
 		return id.hashCode();
 	}
-	
 	@Override
 	public boolean equals(Object other) {
 		if(other instanceof Neighbor){
@@ -58,6 +56,7 @@ public class Neighbor implements Parcelable {
 		return false;
 	}
 	
+	// manditory for all parcelable
     public static final Parcelable.Creator<Neighbor> CREATOR
 	    = new Parcelable.Creator<Neighbor>() {
 			public Neighbor createFromParcel(Parcel in) {
