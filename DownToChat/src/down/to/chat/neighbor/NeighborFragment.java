@@ -1,11 +1,11 @@
 package down.to.chat.neighbor;
 
-import android.app.Fragment;
+import down.to.chat.R;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * Fragment representing a neighbor.  
@@ -50,9 +50,9 @@ public class NeighborFragment extends Fragment {
 			return null;
 		}
 		
-		TextView tv = new TextView(getActivity());
-		
-		return tv;
+		View neighborView = inflater.inflate(R.layout.neighbor_view, container, 
+				false);
+		return neighborView;
 	}
 }
 

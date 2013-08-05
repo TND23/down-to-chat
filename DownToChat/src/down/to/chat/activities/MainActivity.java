@@ -1,16 +1,46 @@
 package down.to.chat.activities;
 
+import java.util.List;
+
 import down.to.chat.R;
+import down.to.chat.connector.AsynchronousConnector;
+import down.to.chat.connector.TestConnector;
+import down.to.chat.neighbor.Neighbor;
+import down.to.chat.neighbor.NeighborFragment;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.neighbor_scroll);
+		
+		// make sure the holder exists
+		if( findViewById(R.id.neighbor_container) != null ){
+		
+			// make sure we haven't drawn the fragment yet
+			if( savedInstanceState != null) {
+				Log.i("MAIN", "Exiting due to existing saveInstanceState.");
+				return;
+			}
+			
+			AsynchronousConnector connector = new TestConnector();
+			
+			List<Neighbor> neighbors = connector.getNeighbors();
+			
+			for(Neighbor n : neighbors) {
+				NeighborFragment nf = NeighborFragment.newInstance(n);
+				Log.i("MAIN", "Adding neighbor " + n.getName());
+				getSupportFragmentManager().beginTransaction().
+					add(R.id.neighbor_container, nf).commit();
+			}
+			
+		}
+		
 	}
 
 	@Override
