@@ -1,14 +1,16 @@
 package down.to.chat.neighbor;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import down.to.chat.enums.Availability;
 
 /**
- * Another user of the app who is nearby.
+ * Another user of the app who is nearby. Parcelable to allow passing in bundle
  * 
  * @author Matthew
  *
  */
-public class Neighbor {
+public class Neighbor implements Parcelable {
 	
 
 	private String name;	// human readable name
@@ -17,6 +19,55 @@ public class Neighbor {
 	// TODO discovery time
 	// TODO proximity
 	// TODO photo
+	
+	public Neighbor(String name, String id, Availability avail){
+		setName(name);
+		setId(id);
+		setAvailability(avail);
+	}
+	
+	
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(getName());
+		dest.writeString(getId());
+		dest.writeString(availability.name());
+	}
+	
+	public Neighbor( Parcel in ) {
+		setName(in.readString());
+		setId(in.readString());
+		setAvailability(Availability.valueOf(in.readString()));
+	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other instanceof Neighbor){
+			return id.equals(((Neighbor)other).getId()); 
+		}
+		return false;
+	}
+	
+    public static final Parcelable.Creator<Neighbor> CREATOR
+	    = new Parcelable.Creator<Neighbor>() {
+			public Neighbor createFromParcel(Parcel in) {
+			    return new Neighbor(in);
+			}
+			
+			public Neighbor[] newArray(int size) {
+			    return new Neighbor[size];
+			}
+	};
 	
 	/**
 	 * @return the name
