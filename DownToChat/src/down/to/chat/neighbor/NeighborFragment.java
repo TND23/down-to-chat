@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * Fragment representing a neighbor.  
@@ -52,6 +53,15 @@ public class NeighborFragment extends Fragment {
 		
 		View neighborView = inflater.inflate(R.layout.neighbor_view, container, 
 				false);
+		TextView nameView = (TextView) neighborView.findViewById(R.id.name);
+		nameView.setText(getNeighbor().getName());
+		
+		View neighborHolder = neighborView.findViewById(R.id.neighbor_holder);
+		switch( getNeighbor().getAvailability() ) {
+		case AVAILABLE:
+			
+		}
+		
 		return neighborView;
 	}
 }
