@@ -12,6 +12,16 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 
+/**
+ * Main activity using Neighbor fragment to generate list appearance of 
+ * neighbor fragments. 
+ * 
+ * (( initial implementation. List view will be more efficient and allow better
+ * access to neighbor elements ))
+ * 
+ * @author Matthew
+ *
+ */
 public class MainActivity extends FragmentActivity {
 
 	@Override
@@ -28,7 +38,7 @@ public class MainActivity extends FragmentActivity {
 				return;
 			}
 			
-			AsynchronousConnector connector = new TestConnector();
+			AsynchronousConnector connector = new TestConnector(this);
 			
 			List<Neighbor> neighbors = connector.getNeighbors();
 			

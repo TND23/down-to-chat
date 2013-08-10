@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/neighbor_holder"
+    android:id="@+id/neighbor_wrapper"
     style="@style/ActionBar.Solid.Redwhite"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
-    android:background="@android:color/darker_gray"
-    android:gravity="top" >
+    android:background="@android:color/transparent"
+    android:gravity="top"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp" >
 
-    <ImageView
-        android:id="@+id/neighbor_image"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/neighbor_holder"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_action_user" />
+        android:background="@android:color/holo_orange_light" >
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_margin="3dp"
-        android:layout_marginLeft="14dp"
-        android:layout_toRightOf="@+id/neighbor_image"
-        android:text="User Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ImageView
+            android:id="@+id/neighbor_image"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:contentDescription="@string/image_desc" />
 
-    <TextView
-        android:id="@+id/neighbor_availability"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
-        android:layout_below="@+id/neighbor_image"
-        android:layout_marginLeft="24dp"
-        android:text="Available"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_marginLeft="14dp"
+            android:text="@string/user_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
 
 </RelativeLayout>

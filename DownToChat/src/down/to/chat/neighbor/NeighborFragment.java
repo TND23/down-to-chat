@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -50,18 +51,25 @@ public class NeighborFragment extends Fragment {
 			// gets shown.
 			return null;
 		}
-		
+		// initialize 
 		View neighborView = inflater.inflate(R.layout.neighbor_view, container, 
 				false);
 		TextView nameView = (TextView) neighborView.findViewById(R.id.name);
 		nameView.setText(getNeighbor().getName());
+		ImageView neighborImage = (ImageView) neighborView.findViewById(
+				R.id.neighbor_image);
+		neighborImage.setImageBitmap(getNeighbor().getPhoto());
 		
 		View neighborHolder = neighborView.findViewById(R.id.neighbor_holder);
 		switch( getNeighbor().getAvailability() ) {
 		case AVAILABLE:
-			
+			neighborHolder.setBackgroundColor(0xFF00FF00);
+			break;
+		case UNAVAILABLE:
+			neighborHolder.setBackgroundColor(0xFFFF0000);
+		default:
+			break;	
 		}
-		
 		return neighborView;
 	}
 }

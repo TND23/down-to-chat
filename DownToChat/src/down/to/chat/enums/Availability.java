@@ -9,5 +9,5 @@ package down.to.chat.enums;
  */
 public enum Availability {	
 	AVAILABLE,
-	NOT_AVAILIABLE;
+	UNAVAILABLE;
 }

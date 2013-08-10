@@ -1,5 +1,6 @@
 package down.to.chat.neighbor;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import down.to.chat.enums.Availability;
@@ -16,14 +17,15 @@ public class Neighbor implements Parcelable {
 	private String name;	// human readable name
 	private String id; 		// unique id
 	private Availability availability;
+	private Bitmap photo;
 	// TODO discovery time
 	// TODO proximity
-	// TODO photo
 	
-	public Neighbor(String name, String id, Availability avail){
+	public Neighbor(String name, String id, Availability avail, Bitmap photo){
 		setName(name);
 		setId(id);
 		setAvailability(avail);
+		setPhoto(photo);
 	}
 	
 	// parcelling logic
@@ -36,11 +38,13 @@ public class Neighbor implements Parcelable {
 		dest.writeString(getName());
 		dest.writeString(getId());
 		dest.writeString(availability.name());
+		dest.writeParcelable(photo,0);
 	}
-	public Neighbor( Parcel in ) {
+	public Neighbor( Parcel in ) {		
 		setName(in.readString());
 		setId(in.readString());
 		setAvailability(Availability.valueOf(in.readString()));
+		setPhoto((Bitmap)in.readParcelable(Bitmap.class.getClassLoader()));
 	}
 	
 	// all will have unique id.
@@ -103,6 +107,20 @@ public class Neighbor implements Parcelable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the photo
+	 */
+	public Bitmap getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * @param photo the photo to set
+	 */
+	public void setPhoto(Bitmap photo) {
+		this.photo = photo;
 	}
 	
 }
